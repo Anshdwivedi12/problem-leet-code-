@@ -3,7 +3,7 @@ public:
     vector<int> decrypt(vector<int>& code, int k) {
        
         int n=code.size();
-        
+      
         if(k==0){
             return vector<int>(n,0);
         }
