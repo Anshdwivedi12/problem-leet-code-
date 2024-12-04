@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& m, int t) {
+        int a=m.size();
+        int b=m[0].size();
+        for(int i=0;i<a;i++){
+            for(int j=0;j<b;j++){
+                if(m[i][j]==t){
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+    }
+};
