@@ -8,6 +8,7 @@ public:
             pq.push(sqrt(temp));
             k--;
         }
+
         long long result = 0;
 
         while(!pq.empty()) {
