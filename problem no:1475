@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> finalPrices(vector<int>& p) {
+        int cost=0;
+        // if(is_sorted(p.begin(),p.end())){
+        //     return p;
+        // }
+        for(int i=0;i<p.size()-1;i++){
+            // if(is_sorted(p.begin()+i,p.end()))
+            //     return p;
+            for(int j=i+1;j<p.size();j++){
+                if(p[j]<=p[i]){
+                    p[i]-=p[j];
+                    break;
+                }
+            }
+        }
+        return p;
+    }
+};
