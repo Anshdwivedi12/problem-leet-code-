@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
+        vector<int>l;
+        vector<int>r;
+        int c=0;
+
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(nums[i]<pivot){
+                l.push_back(nums[i]);
+            }
+            else if(nums[i]>pivot){
+                r.push_back(nums[i]);
+            }
+            else{
+                c++;
+            }
+        }
+        int p=c;
+         int k=l.size();
+         int j=0;
+         while(c>0){
+            l.push_back(pivot);
+            c--;
+         }
+         for(int i=k+p;i<n;i++){
+            l.push_back(r[j]);
+            j++;
+         }
+         return l;
+        
+    }
+};
