@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int countStudents(vector<int>& st, vector<int>& sa) {
+        int n=st.size();
+        queue<int>q;
+        stack<int>sta;
+        for(auto &it :st)
+        q.push(it);
+        for(int i=n-1;i>=0;i--)
+        sta.push(sa[i]);
+        int take=0;
+        while(!q.empty()&& take<q.size()){
+            if(q.front()==sta.top()){
+                sta.pop();
+                q.pop();
+                take=0;
+            }
+            else{
+                q.push(q.front());
+                q.pop();
+                take++;
+            }
+        }
+        return q.size();
+        
+    }
+};
