@@ -1,0 +1,35 @@
+class Solution {
+public:
+     bool isPrime(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+    vector<int> closestPrimes(int l, int r) {
+        vector<int>ans;
+        
+        for (int num = l; num <= r; num++) {
+        if (isPrime(num)) {
+            ans.push_back(num);
+        }
+        }
+        vector<int>res(2);
+        if(ans.size()<2)
+        return {-1,-1};
+
+        int min = INT_MAX;
+        for (int i = 1; i < ans.size(); i++) {
+            int diff = ans[i] - ans[i - 1];
+            if (diff < min) {
+                min = diff;
+                res[0] = ans[i - 1];
+                res[1] = ans[i];
+            }
+        }
+    
+    return res;
+        
+    }
+};
