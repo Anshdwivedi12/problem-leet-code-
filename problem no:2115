@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& re, vector<vector<string>>& in, vector<string>& su) {
+        unordered_set<string> supp(su.begin(), su.end());
+        vector<string> ans;
+
+        unordered_map<string, int> indegree; // Tracks dependencies
+        unordered_map<string, vector<string>> graph;
+
+        // Initialize graph and indegree count
+        for (int i = 0; i < re.size(); i++) {
+            for (string& ingredient : in[i]) {
+                if (supp.find(ingredient) == supp.end()) { // Ingredient is not in supplies
+                    graph[ingredient].push_back(re[i]); // Ingredient is required by recipe
+                    indegree[re[i]]++; // Increase dependency count for recipe
+                }
+            }
+        }
+
+        queue<string> q;
+        // Add all recipes with 0 dependencies (all ingredients available)
+        for (string& recipe : re) {
+            if (indegree[recipe] == 0) {
+                q.push(recipe);
+                supp.insert(recipe); // Recipe can be used as an ingredient now
+            }
+        }
+
+        // Process recipes that can be made
+        while (!q.empty()) {
+            string recipe = q.front();
+            q.pop();
+            ans.push_back(recipe);
+
+            for (string& nextRecipe : graph[recipe]) {
+                if (--indegree[nextRecipe] == 0) { // If all required ingredients are available
+                    q.push(nextRecipe);
+                    supp.insert(nextRecipe);
+                }
+            }
+        }
+
+        return ans;
+    }
+};
