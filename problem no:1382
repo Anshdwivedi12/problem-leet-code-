@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void inorder(TreeNode* root,vector<int>&ans){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left,ans);
+    ans.push_back(root->val);
+    inorder(root->right,ans);
+
+}
+   TreeNode* solve(int l,int r, vector<int>&ans){
+    if(l>r){
+        return NULL;
+    }
+    int mid=l+(r-l)/2;
+    TreeNode* BST=new  TreeNode(ans[mid]);
+    BST->left=solve(l,mid-1,ans);
+    BST->right=solve(mid+1,r,ans);
+    return BST;
+
+
+   }
+    TreeNode* balanceBST(TreeNode* root) {
+        vector<int>ans;
+        inorder(root,ans);
+        int l=0;
+        int r=ans.size()-1;
+        return solve(l,r,ans);
+
+        
+    }
+};
