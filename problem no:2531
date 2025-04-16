@@ -1,0 +1,31 @@
+class Solution {
+public:
+    long long countGood(vector<int>& nums, int k) {
+        int i=0;
+        int j=0;
+        int n=nums.size();
+        unordered_map<int,int>mp;//map bana liya 
+
+        long long result=0;
+        
+        long long pair=0;
+
+        while(j<n){
+            pair+=mp[nums[j]];//isse phele mila ho tho add kar lo 
+            mp[nums[j]]++;// uski freq add kar lo map
+            while(pair>=k){
+                result+=(n-j);//size-j karne se humko good subarray tho mil hi gaya haitho uske ange bhi hoga
+                
+                mp[nums[i]]--;
+
+                pair-=mp[nums[i]];
+
+                i++;
+            }
+            j++;
+
+        }
+        return result;
+        
+    }
+};
