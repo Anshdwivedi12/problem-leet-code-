@@ -1,0 +1,26 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool ismirror(TreeNode* L,TreeNode* R){
+        if(L==NULL && R==NULL)// agar don atah mai null hai tho barabar hai
+        return true;
+        if(L==NULL || R==NULL){ //agar koi ek tree null hai tho return false hoga 
+            return false;
+        }
+        return ((L->val==R->val) && ismirror(L->left,R->right) && ismirror(L->right,R->left));//dono ki value agar same ho aur left sub tree ka left aur right subtree ka right and left subtree ka right and right subtree left ke liyre recursive call kar di hai 
+     }
+    bool isSymmetric(TreeNode* root) {
+        return ismirror(root,root);//phele left sub tree aur tright sub tree bna li 
+        
+    }
+};
