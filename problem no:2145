@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int numberOfArrays(vector<int>& d, int l, int u) {
+        int curr=0;
+        int maxl=0;
+        int minl=0;
+        for(auto &it :d){
+            curr+=it;
+            minl=min(minl,curr);
+            maxl=max(maxl,curr);
+            if((u-maxl)-(l-minl)+1<=0){
+                return 0;
+            }
+        }
+        return (u-maxl)-(l-minl)+1;
+        
+    }
+};
