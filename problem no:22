@@ -1,0 +1,38 @@
+class Solution {
+public:
+vector<string> result;
+bool isvalid(string &curr){
+    stack<int>st;
+    for(int i=0;i<curr.size();i++){
+        if(curr[i]=='('){
+            st.push(curr[i]);
+        }
+        else{
+            if (st.empty()) return false;
+                st.pop();
+        }
+    }
+   return st.empty();
+}
+void solve(string &curr,int n){
+    if(curr.size()==2*n){// agar str ke length equal hai 2*n tho check karao valid hai hai ki nahi
+        if(isvalid(curr)){
+            result.push_back(curr);// agar valid tho dal do result mai
+        }
+        return;
+    }
+    curr.push_back('(');// phele ye dalo 
+    solve(curr,n);// expolre karo (  leakr
+    curr.pop_back(); // ( hata d0
+
+    curr.push_back(')');
+    solve(curr,n);
+    curr.pop_back();
+}
+    vector<string> generateParenthesis(int n) {
+        string curr="";//make the empty string 
+        solve(curr,n);// call mara ya ha per
+        return result;
+        
+    }
+};
