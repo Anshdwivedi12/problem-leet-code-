@@ -1,0 +1,44 @@
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, int k) {
+        int i = 0;  // Left pointer (start of the subarray)
+        int j = 0;  // Right pointer (end of the subarray)
+        int maxi = *max_element(nums.begin(), nums.end());  // Find the maximum element in the array
+        long long count = 0;  // To store the total count of valid subarrays
+
+        // Loop through the array with the right pointer (j) expanding the window
+        while (j < nums.size()) {
+            
+            // If the current element is the maximum, decrement k
+            if (nums[j] == maxi) {
+                k--;
+            }
+            j++;  // Expand the window by moving the right pointer to the right
+
+            // When we have found a subarray with exactly k maximum elements
+            if (k == 0) {
+                // Move the left pointer (i) to skip all elements until we reach a max element
+                while (nums[i] != maxi) {
+                    i++;
+                }
+                // Add all valid subarrays from 0 to i (inclusive)
+                count += (i + 1);
+            }
+
+            // If k becomes negative (meaning there are more than k max elements)
+            if (k < 0) {
+                // Move the left pointer (i) to shrink the window and adjust the count
+                while (k != 0) {
+                    i++;
+                    if (nums[i] == maxi) {
+                        k++;  // Increment k as we remove a max element
+                    }
+                }
+                // Add all valid subarrays from 0 to i (inclusive)
+                count += (i + 1);
+            }
+        }
+        
+        return count;  // Return the total count of valid subarrays
+    }
+};
