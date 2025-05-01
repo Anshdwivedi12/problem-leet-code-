@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        stack<int>st;
+        int n=p.size();
+        int res=INT_MIN;
+        for(int i=n-1;i>=0;i--){
+           if(!st.empty()){
+            res=max(res,st.top()-p[i]);
+           }
+            if(st.empty() || st.top()<p[i]){
+                st.push(p[i]);
+            }
+        }
+        return res<0?0:res;
+        
+    }
+};
